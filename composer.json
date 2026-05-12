@@ -1,6 +1,7 @@
 {
   "name": "dwolla/dwollaswagger",
   "description": "",
+  "version": "1.10.0",
   "keywords": [
     "swagger",
     "php",
