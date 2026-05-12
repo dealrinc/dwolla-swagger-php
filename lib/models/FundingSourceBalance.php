@@ -26,6 +26,7 @@ namespace DwollaSwagger\models;
 
 use \ArrayAccess;
 
+#[\AllowDynamicProperties]
 class FundingSourceBalance implements ArrayAccess {
   static $swaggerTypes = array(
       '_links' => 'map[string,HalLink]',
@@ -50,7 +51,7 @@ class FundingSourceBalance implements ArrayAccess {
   public $last_updated; /* DateTime */
   public $status; /* string */
 
-  public function __construct(array $data = null) {
+  public function __construct(?array $data = null) {
     $this->_links = isset($data["_links"]) ? $data["_links"] : null;
     $this->_embedded = isset($data["_embedded"]) ? $data["_embedded"] : null;
     $this->balance = isset($data["balance"]) ? $data["balance"] : null;
@@ -58,23 +59,19 @@ class FundingSourceBalance implements ArrayAccess {
     $this->status = isset($data["status"]) ? $data["status"] : null;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetExists($offset) {
+  public function offsetExists(mixed $offset): bool {
     return isset($this->$offset);
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetGet($offset) {
+  public function offsetGet(mixed $offset): mixed {
     return $this->$offset;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value) {
+  public function offsetSet(mixed $offset, mixed $value): void {
     $this->$offset = $value;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetUnset($offset) {
+  public function offsetUnset(mixed $offset): void {
     unset($this->$offset);
   }
 }

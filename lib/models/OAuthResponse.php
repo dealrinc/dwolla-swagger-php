@@ -26,6 +26,7 @@ namespace DwollaSwagger\models;
 
 use \ArrayAccess;
 
+#[\AllowDynamicProperties]
 class OAuthResponse implements ArrayAccess {
   static $swaggerTypes = array(
       '_links' => 'map[string,HalLink]',
@@ -56,7 +57,7 @@ class OAuthResponse implements ArrayAccess {
   public $token_type; /* string */
   public $scope; /* string */
 
-  public function __construct(array $data = null) {
+  public function __construct(?array $data = null) {
     $this->_links = isset($data["_links"]) ? $data["_links"] : null;
     $this->access_token = isset($data["access_token"]) ? $data["access_token"] : null;
     $this->expires_in = isset($data["expires_in"]) ? $data["expires_in"] : null;
@@ -66,23 +67,19 @@ class OAuthResponse implements ArrayAccess {
     $this->scope = isset($data["scope"]) ? $data["scope"] : null;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetExists($offset) {
+  public function offsetExists(mixed $offset): bool {
     return isset($this->$offset);
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetGet($offset) {
+  public function offsetGet(mixed $offset): mixed {
     return $this->$offset;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value) {
+  public function offsetSet(mixed $offset, mixed $value): void {
     $this->$offset = $value;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetUnset($offset) {
+  public function offsetUnset(mixed $offset): void {
     unset($this->$offset);
   }
 }

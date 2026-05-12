@@ -26,6 +26,7 @@ namespace DwollaSwagger\models;
 
 use \ArrayAccess;
 
+#[\AllowDynamicProperties]
 class Exchange implements ArrayAccess {
   static $swaggerTypes = array(
       '_links' => 'map[string,HalLink]',
@@ -47,30 +48,26 @@ class Exchange implements ArrayAccess {
   public $status; /* string */
   public $created; /* DateTime */
 
-  public function __construct(array $data = null) {
+  public function __construct(?array $data = null) {
     $this->_links = isset($data["_links"]) ? $data["_links"] : null;
     $this->id = isset($data["id"]) ? $data["id"] : null;
     $this->status = isset($data["status"]) ? $data["status"] : null;
     $this->created = isset($data["created"]) ? $data["created"] : null;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetExists($offset) {
+  public function offsetExists(mixed $offset): bool {
     return isset($this->$offset);
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetGet($offset) {
+  public function offsetGet(mixed $offset): mixed {
     return $this->$offset;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value) {
+  public function offsetSet(mixed $offset, mixed $value): void {
     $this->$offset = $value;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetUnset($offset) {
+  public function offsetUnset(mixed $offset): void {
     unset($this->$offset);
   }
 }

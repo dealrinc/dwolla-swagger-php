@@ -39,6 +39,7 @@ class TokensApi {
   }
 
   private $apiClient; // instance of the ApiClient
+  private $authSettings;
 
   /**
    * get the API client

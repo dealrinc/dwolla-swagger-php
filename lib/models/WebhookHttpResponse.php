@@ -26,6 +26,7 @@ namespace DwollaSwagger\models;
 
 use \ArrayAccess;
 
+#[\AllowDynamicProperties]
 class WebhookHttpResponse implements ArrayAccess {
   static $swaggerTypes = array(
       'timestamp' => 'DateTime',
@@ -47,30 +48,26 @@ class WebhookHttpResponse implements ArrayAccess {
   public $status_code; /* int */
   public $body; /* string */
 
-  public function __construct(array $data = null) {
+  public function __construct(?array $data = null) {
     $this->timestamp = isset($data["timestamp"]) ? $data["timestamp"] : null;
     $this->headers = isset($data["headers"]) ? $data["headers"] : null;
     $this->status_code = isset($data["status_code"]) ? $data["status_code"] : null;
     $this->body = isset($data["body"]) ? $data["body"] : null;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetExists($offset) {
+  public function offsetExists(mixed $offset): bool {
     return isset($this->$offset);
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetGet($offset) {
+  public function offsetGet(mixed $offset): mixed {
     return $this->$offset;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value) {
+  public function offsetSet(mixed $offset, mixed $value): void {
     $this->$offset = $value;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetUnset($offset) {
+  public function offsetUnset(mixed $offset): void {
     unset($this->$offset);
   }
 }

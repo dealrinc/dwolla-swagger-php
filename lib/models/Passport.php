@@ -26,6 +26,7 @@ namespace DwollaSwagger\models;
 
 use \ArrayAccess;
 
+#[\AllowDynamicProperties]
 class Passport implements ArrayAccess {
   static $swaggerTypes = array(
       'number' => 'string',
@@ -41,28 +42,24 @@ class Passport implements ArrayAccess {
   public $number; /* string */
   public $country; /* string */
 
-  public function __construct(array $data = null) {
+  public function __construct(?array $data = null) {
     $this->number = isset($data["number"]) ? $data["number"] : null;
     $this->country = isset($data["country"]) ? $data["country"] : null;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetExists($offset) {
+  public function offsetExists(mixed $offset): bool {
     return isset($this->$offset);
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetGet($offset) {
+  public function offsetGet(mixed $offset): mixed {
     return $this->$offset;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value) {
+  public function offsetSet(mixed $offset, mixed $value): void {
     $this->$offset = $value;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetUnset($offset) {
+  public function offsetUnset(mixed $offset): void {
     unset($this->$offset);
   }
 }

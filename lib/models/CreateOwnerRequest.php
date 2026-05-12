@@ -26,6 +26,7 @@ namespace DwollaSwagger\models;
 
 use \ArrayAccess;
 
+#[\AllowDynamicProperties]
 class CreateOwnerRequest implements ArrayAccess {
   static $swaggerTypes = array(
       'first_name' => 'string',
@@ -53,7 +54,7 @@ class CreateOwnerRequest implements ArrayAccess {
   public $address; /* Address */
   public $passport; /* Passport */
 
-  public function __construct(array $data = null) {
+  public function __construct(?array $data = null) {
     $this->first_name = isset($data["first_name"]) ? $data["first_name"] : null;
     $this->last_name = isset($data["last_name"]) ? $data["last_name"] : null;
     $this->ssn = isset($data["ssn"]) ? $data["ssn"] : null;
@@ -62,23 +63,19 @@ class CreateOwnerRequest implements ArrayAccess {
     $this->passport = isset($data["passport"]) ? $data["passport"] : null;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetExists($offset) {
+  public function offsetExists(mixed $offset): bool {
     return isset($this->$offset);
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetGet($offset) {
+  public function offsetGet(mixed $offset): mixed {
     return $this->$offset;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value) {
+  public function offsetSet(mixed $offset, mixed $value): void {
     $this->$offset = $value;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetUnset($offset) {
+  public function offsetUnset(mixed $offset): void {
     unset($this->$offset);
   }
 }
