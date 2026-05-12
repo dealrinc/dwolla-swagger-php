@@ -26,6 +26,7 @@ namespace DwollaSwagger\models;
 
 use \ArrayAccess;
 
+#[\AllowDynamicProperties]
 class VerifyMicroDepositsRequest implements ArrayAccess {
   static $swaggerTypes = array(
       'amount1' => 'Amount',
@@ -41,28 +42,24 @@ class VerifyMicroDepositsRequest implements ArrayAccess {
   public $amount1; /* Amount */
   public $amount2; /* Amount */
 
-  public function __construct(array $data = null) {
+  public function __construct(?array $data = null) {
     $this->amount1 = isset($data["amount1"]) ? $data["amount1"] : null;
     $this->amount2 = isset($data["amount2"]) ? $data["amount2"] : null;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetExists($offset) {
+  public function offsetExists(mixed $offset): bool {
     return isset($this->$offset);
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetGet($offset) {
+  public function offsetGet(mixed $offset): mixed {
     return $this->$offset;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value) {
+  public function offsetSet(mixed $offset, mixed $value): void {
     $this->$offset = $value;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetUnset($offset) {
+  public function offsetUnset(mixed $offset): void {
     unset($this->$offset);
   }
 }

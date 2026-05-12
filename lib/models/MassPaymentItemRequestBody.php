@@ -26,6 +26,7 @@ namespace DwollaSwagger\models;
 
 use \ArrayAccess;
 
+#[\AllowDynamicProperties]
 class MassPaymentItemRequestBody implements ArrayAccess {
   static $swaggerTypes = array(
       '_links' => 'object',
@@ -50,7 +51,7 @@ class MassPaymentItemRequestBody implements ArrayAccess {
   public $correlation_id; /* string */
   public $ach_details; /* object */
 
-  public function __construct(array $data = null) {
+  public function __construct(?array $data = null) {
     $this->_links = isset($data["_links"]) ? $data["_links"] : null;
     $this->amount = isset($data["amount"]) ? $data["amount"] : null;
     $this->metadata = isset($data["metadata"]) ? $data["metadata"] : null;
@@ -58,23 +59,19 @@ class MassPaymentItemRequestBody implements ArrayAccess {
     $this->ach_details = isset($data["ach_details"]) ? $data["ach_details"] : null;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetExists($offset) {
+  public function offsetExists(mixed $offset): bool {
     return isset($this->$offset);
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetGet($offset) {
+  public function offsetGet(mixed $offset): mixed {
     return $this->$offset;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value) {
+  public function offsetSet(mixed $offset, mixed $value): void {
     $this->$offset = $value;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetUnset($offset) {
+  public function offsetUnset(mixed $offset): void {
     unset($this->$offset);
   }
 }

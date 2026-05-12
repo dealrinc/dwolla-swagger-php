@@ -26,6 +26,7 @@ namespace DwollaSwagger\models;
 
 use \ArrayAccess;
 
+#[\AllowDynamicProperties]
 class UpdateBankRequest implements ArrayAccess {
   static $swaggerTypes = array(
       '_links' => 'object',
@@ -50,7 +51,7 @@ class UpdateBankRequest implements ArrayAccess {
   public $account_number; /* string */
   public $bank_account_type; /* string */
 
-  public function __construct(array $data = null) {
+  public function __construct(?array $data = null) {
     $this->_links = isset($data["_links"]) ? $data["_links"] : null;
     $this->name = isset($data["name"]) ? $data["name"] : null;
     $this->routing_number = isset($data["routing_number"]) ? $data["routing_number"] : null;
@@ -58,23 +59,19 @@ class UpdateBankRequest implements ArrayAccess {
     $this->bank_account_type = isset($data["bank_account_type"]) ? $data["bank_account_type"] : null;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetExists($offset) {
+  public function offsetExists(mixed $offset): bool {
     return isset($this->$offset);
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetGet($offset) {
+  public function offsetGet(mixed $offset): mixed {
     return $this->$offset;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value) {
+  public function offsetSet(mixed $offset, mixed $value): void {
     $this->$offset = $value;
   }
 
-  #[\ReturnTypeWillChange]
-    public function offsetUnset($offset) {
+  public function offsetUnset(mixed $offset): void {
     unset($this->$offset);
   }
 }
